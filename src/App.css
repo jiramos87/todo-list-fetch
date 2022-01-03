@@ -1,10 +1,15 @@
+
+
+
 .App {
   text-align: center;
+  min-height: 100vh;
 }
 
 .container {
   
   background-color: rgb(212, 212, 212);
+  min-height: 100vh;
 
 }
 
@@ -17,15 +22,13 @@
 }
 
 .task-form {
-  height: 30px;
-  padding: 10px;
-  padding-left: 30px;
+  height: 4rem;
+  padding: 1rem 3rem 1rem 2rem;
   text-align: left;
 }
 
 .task-input {
   width: auto;
-  height: 30px;
   border: none;
   font-size: 25px;
 }
@@ -37,20 +40,19 @@
 
 .task {
   border-top: 1px solid black;
-  height: 30px;
+  height: 5rem;
   font-size: 25px;
-  padding: 10px;
-  padding-left: 30px;
+  padding: 1rem 3rem 1rem 2rem;
   text-align: left;
 }
 
 .task-left {
   border-top: 1px solid black;
   border-bottom: 1px solid black;
-  height: 30px;
+  height: 4rem;
   font-size: 17px;
   color: grey;
-  padding: 10px;
+  padding: 1rem 1rem 1rem 1rem;
   text-align: left;
 }
 

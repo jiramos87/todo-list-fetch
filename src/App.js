@@ -1,13 +1,28 @@
 import React, {useState, useEffect} from 'react';
-import './App.css';
 import TaskForm from './components/TaskForm';
 import TaskList from './components/TaskList';
 import TaskLeft from './components/TaskLeft';
 import tasklist from './components/services/tasklist';
+import "bootstrap/dist/css/bootstrap.min.css"
+import '@popperjs/core'
+import 'bootstrap/dist/js/bootstrap.bundle.min'
+
+import './App.css';
 
 const App = () => {
-
-
+  const basename = process.env.BASENAME || "";
+  
+  useEffect(() => {
+    fetch('https://assets.breatheco.de/apis/fake/todos/user/jiramos87', {
+      method: "PUT",
+      body: JSON.stringify(tasks),
+      headers: {
+      "Content-Type": "application/json"
+      }})
+    .then(response => response.json())
+    .then(data => console.log(data));
+    
+  }, []);
 
   const [ tasks, setTasks ] = useState([
     { label: "Make the bed", done: false },
@@ -19,19 +34,7 @@ const App = () => {
 
   console.log('tasks: ', tasks)
 
-  useEffect( () => {
-    fetch('https://assets.breatheco.de/apis/fake/todos/user/jiramos87', {
-      method: "PUT",
-      body: JSON.stringify(tasks),
-      headers: {
-        "Content-Type": "application/json"
-      }})
-    .then(response => response.json())
-    .then(data => console.log(data));
-    }, [tasks])
-  
-  
- 
+
   function addTask(event) {
     event.preventDefault();
     const taskObj = {
@@ -61,7 +64,6 @@ const App = () => {
   }
 
   const deleteTask = (label) => {
-
     setTasks(tasks.filter(task => task.label !== label))
   }
   
@@ -76,11 +78,29 @@ const App = () => {
     setStyle({display: 'none'})
   }
 
+  // const tasklist = document.querySelectorAll('.close-button-div')
+  // function activeTask() {
+  //     tasklist.forEach((item) => {
+  //     item.classList.remove('task-active')
+  //     });
+  //     this.classList.add('task-active');
+  // }
+  // function inactiveTask() {
+  //     tasklist.forEach((item) => {
+  //     item.classList.remove('task-active')
+  //     });
+  // }
+  // tasklist.forEach((item) =>
+  // item.addEventListener('mouseover', activeTask))
+  // tasklist.forEach((item) =>
+  // item.addEventListener('mouseout', inactiveTask))
+  
+
   return (
     <div className="App">
       <div className="container">
-        <h1>TODOS</h1>
-        <div className="main-card">
+        <h1>todos</h1>
+        <div className="main-card rounded">
           <TaskForm onSubmit={addTask} 
                   taskValue={newTask} taskChange={handleTaskChange}/>  
           <TaskList tasks={tasks} onMouseEnter={handleHoverOn} onMouseLeave={handleHoverOff} deleteTask={deleteTask} style={style}/> 
